@@ -23,7 +23,7 @@ const Registration = () => {
     full_name: "",
   });
 
-  const [hidden, setHidden] = useState(true);
+  const [hidden] = useState(true);
   const [errMsgFirstName, setErrMsgFistName] = useState("");
   const [errMsgLastName, setErrMsgLastName] = useState("");
   const [errMsgPhone, setErrMsgPhone] = useState("");
@@ -31,10 +31,6 @@ const Registration = () => {
   const [errMsgPassword, setErrMsgPassword] = useState("");
   const [successMsg, setSuccessMsg] = useState("");
   const [error, setError] = useState(false);
-
-  const toggleShow = () => {
-    setHidden(!hidden);
-  }
 
   const onChangeHandler = (e, key) => {
     let tmpSignup = { ...signupData };
@@ -122,7 +118,6 @@ const Registration = () => {
               name="first_name"
               label="First Name"
               fullWidth
-              hintText="Phone"
               color="primary"
               variant="outlined"
               value={signupData.first_name}

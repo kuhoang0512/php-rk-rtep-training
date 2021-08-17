@@ -21,11 +21,10 @@ const Login  = () => {
     password: "",
   });
 
-  const [hidden, setHidden] = useState(true);
+  const [hidden] = useState(true);
   const [errMsgEmail, setErrMsgEmail] = useState("");
   const [errMsgPassword, setErrMsgPassword] = useState("");
   const [errMsg, setErrMsg] = useState("");
-  const [accessToken, setAccessToken] = useState("");
   const [redirect, setRedirect] = useState(false);
   const [error, setError] = useState(false);
 
@@ -52,7 +51,6 @@ const Login  = () => {
       .then((result) => {
         if(result.status === 'success'){
 
-          setAccessToken(result.token)
           sessionStorage.setItem('token', result.token)
           sessionStorage.setItem('userName', loginData.email)
           sessionStorage.setItem('isLoggedIn', true)
@@ -117,13 +115,6 @@ const Login  = () => {
                   value={loginData.password}
                   onChange={onChangeHandler}
                 />
-
-                {/* <img
-                  src={hidden ? showPwd : hidePwd}
-                  onClick={toggleShow}
-                  alt="showPwd"
-                  className="eyeIcon"
-                /> */}
               </div>
               <p className="errMsgStyl">{errMsg}</p>
             <Button
