@@ -5,6 +5,8 @@ namespace App\Exceptions;
 use Exception;
 use Illuminate\Auth\AuthenticationException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
+use League\OAuth2\Server\Exception\OAuthServerException;
+use Symfony\Component\Routing\Exception\RouteNotFoundException;
 use Throwable;
 
 class Handler extends ExceptionHandler
@@ -40,8 +42,13 @@ class Handler extends ExceptionHandler
             //
         });
 
-        // $this->renderable(function (Exception $e, $request) {
-        //     return response()->json(["status" => "Unauthorized access", "message" => "You are not allowed to access the API."], 401);
-        // });
+        $this->renderable(function (Exception $e, $request) {
+            // handler for Unauthorized
+            if ( $e instanceof RouteNotFoundException 
+                && $e->getMessage() == "Route [login] not defined.") {
+                return response(["status" => "Unauthorized access", "message" => "You are not allowed to access the API."], 403);
+            }
+        });
     }
+
 }
