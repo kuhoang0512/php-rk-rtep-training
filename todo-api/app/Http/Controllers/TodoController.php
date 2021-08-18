@@ -16,6 +16,21 @@ class TodoController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    /**
+     * @SWG\Get(
+     *     path="/api/user/todos",
+     *     description="Return array todo list of current user",
+     *     security={{"Bearer":{}}},
+     *     @SWG\Response(
+     *         response=200,
+     *         description="OK",
+     *     ),
+     *     @SWG\Response(
+     *         response=401,
+     *         description="Unauthorized"
+     *     )
+     * )
+     */
     public function index()
     {
         $todos = Auth::user()->todos;
